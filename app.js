@@ -5,6 +5,7 @@ var expressLayouts = require('express-ejs-layouts');
 const app = express();
 const port = 3000;
 var morgan = require('morgan')
+const {loadContact} = require ('./kontek');
  
 // create "middleware"
 app.use(morgan('dev'))
@@ -23,9 +24,8 @@ app.get('/', (req, res) =>{
     const nama = "Asep Wilayana";
     const title = "Web Server EJS";
 
-    const file = fs.readFileSync('data/contacts.json','utf8');
-
-    const cont = JSON.parse(file);
+    
+    const cont = loadContact();
 
     res.render('index', {nama:nama, title:title, cont})
 })
